@@ -33,15 +33,28 @@ class App extends Component {
             </Grid.Column>
             <Grid.Column mobile={16} computer={9} className='right-col'>
                 <div className='right-wrap1'>
-                        <Image src={require('./03_iphone8spacegrey_portrait.png')} centered/>
-                    <div className='block-header'>Mobile App</div>
-                    <p className='block-p'>Montuto</p>
+                    <div className='center'>
+                            <Image src={require('./03_iphone8spacegrey_portrait.png')} centered/>
+                        <div style={{marginBottom: 10}}>
+                            <div className='block-header'>Mobile App</div>
+                            <p className='block-p'>Montuto - Developer</p>
+                        </div>
+                    </div>
                 </div>
                 <div className='right-wrap2'>
                     <Image src={require('./iphone-B6Fh_iphone8spacegrey_portrait.png')} centered/>
                     <div className='block-header'>Chat-based delivery</div>
-                    <p className='block-p'>Wizrd</p>
+                    <p className='block-p'> Wizrd - Project Manager</p>
                 </div>
+                <div className='right-wrap3'>
+                    <Image src={require('./Marketplace_iphone8spacegrey_portrait.png')} centered/>
+                    <div className='block-header'>Local bartering app</div>
+                    <p className='block-p'>Tradepost - Project Manager</p>
+                </div>
+                <div className='right-wrap4'>
+                    <div className='black-header'>Languages</div>
+                </div>
+
             </Grid.Column>
 
         </Grid>
