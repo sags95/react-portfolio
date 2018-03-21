@@ -1,9 +1,75 @@
 import React, { Component } from 'react';
-import { Grid, Button, Container, Icon, Image } from 'semantic-ui-react';
+import { Grid, Button, Container, Icon, Image, Form } from 'semantic-ui-react';
+import $ from 'jquery';
+import {form} from 'form-serializer';
 import './App.css';
 
 class App extends Component {
-  render() {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            name: '',
+            email: '',
+            message: '',
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+
+    }
+
+
+
+    handleChange = (e) => {
+        let newState = {};
+
+        newState[e.target.name] = e.target.value;
+        newState[e.target.email] = e.target.value;
+        newState[e.target.message] = e.target.value;
+        this.setState(newState);
+    };
+
+    handleSubmit = (e, message) => {
+        const formUrl = 'https://script.google.com/macros/s/AKfycbzWhmdI0yAy3juKvWjNQ4S3JTZzJCUWJbMjAFBISIXUVzxPZcQ/exec';
+        e.preventDefault();
+
+        let formData = {
+            sender: this.state.name,
+            senderEmail: this.state.email,
+            senderMessage: this.state.message,
+        };
+
+
+
+        
+
+
+
+
+        $.ajax({
+            url: formUrl,
+            dataType: 'json',
+            type: 'GET',
+            data: formData,
+            success: function(data){
+                console.log('Form sent: ' + formData)
+            },
+            error: function(xhr, status, err){
+
+            }
+        });
+
+        this.setState({
+            name: '',
+            email: '',
+            message: '',
+        })
+
+
+    };
+
+    render() {
     return (
 
         <Grid className='page-wrap'>
@@ -18,13 +84,13 @@ class App extends Component {
                         and reach out if you have a project in mind!
                     </p>
                     <div className="icon-group">
-                        <a href='#'>
+                        <a target='_blank' href='https://github.com/sags95'>
                             <Icon name='github' size='big' color='grey'className='icon'/>
                         </a>
-                        <a href='#'>
+                        <a target='_blank' href='https://www.linkedin.com/in/alex-sagel-66505991/'>
                             <Icon name='linkedin' size='big' color='grey' className='icon'/>
                         </a>
-                        <a href='#'>
+                        <a target='_blank' href='https://angel.co/alex-sagel7587-gmail-com'>
                             <Icon name='angellist' size='big' color='grey' className='icons'/>
                         </a>
                     </div>
@@ -52,11 +118,20 @@ class App extends Component {
                     <p className='block-p'>Tradepost - Project Manager</p>
                 </div>
                 <div className='right-wrap4'>
-                    <div className='black-header'>Languages</div>
+                    <div className='black-header'>Get in touch</div>
+                    <Form className='form-wrap' onSubmit={this.handleSubmit}>
+                        <Form.Group widths='equal'>
+                            <Form.Input fluid label='Name' placeholder='Full name' value={this.state.name} name='name' onChange={this.handleChange}/>
+                            <Form.Input fluid label='Email' placeholder='Email' value={this.state.email} name='email' onChange={this.handleChange}/>
+                        </Form.Group>
+                        <Form.TextArea label='Message' placeholder='Say a few words about your project...' value={this.state.message} name='message' onChange={this.handleChange}/>
+                        <Form.Button>Submit</Form.Button>
+                    </Form>
                 </div>
-
+                <div className='footer'>
+                    <p style={{color: '#999'}}> © 2018 Alex Sagel, Made in Canada with React</p>
+                </div>
             </Grid.Column>
-
         </Grid>
 
     );

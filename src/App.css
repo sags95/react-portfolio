@@ -44,7 +44,7 @@
   padding-left: 60px;
   padding-right: 60px;
   height: 100vh;
-  background-color: #E7B1D3;
+  background-color: #f2a2a4;
 }
 .right-wrap4{
   background-color: #F2F1F1;
@@ -61,7 +61,7 @@
 }
 .black-header{
   padding-top: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
   font-size: 2em;
   font-weight: 900;
   text-transform: uppercase;
@@ -96,4 +96,11 @@
   color: #F9F9F9;
   font-weight: 100;
   font-size: 0.85em;
+}
+.footer{
+  background-color: #1F1F1F;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
