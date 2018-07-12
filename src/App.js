@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Button, Container, Icon, Image, Form } from 'semantic-ui-react';
 import $ from 'jquery';
-import {form} from 'form-serializer';
 import './App.css';
 
 class App extends Component {
@@ -16,10 +15,7 @@ class App extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
-
     }
-
-
 
     handleChange = (e) => {
         let newState = {};
@@ -30,33 +26,24 @@ class App extends Component {
         this.setState(newState);
     };
 
+    /**
+     * Calls a Google Sheet script to send form data (state) to Sheet.
+     */
+
     handleSubmit = (e, message) => {
         const formUrl = 'https://script.google.com/macros/s/AKfycbzWhmdI0yAy3juKvWjNQ4S3JTZzJCUWJbMjAFBISIXUVzxPZcQ/exec';
         e.preventDefault();
-
-        let formData = {
-            sender: this.state.name,
-            senderEmail: this.state.email,
-            senderMessage: this.state.message,
-        };
-
-
-
-        
-
-
-
 
         $.ajax({
             url: formUrl,
             dataType: 'json',
             type: 'GET',
-            data: formData,
+            data: this.state,
             success: function(data){
-                console.log('Form sent: ' + formData)
+                console.log('Form sent: ' + this.state)
             },
             error: function(xhr, status, err){
-
+                console.log('Form error:' + xhr + 'status: ' + status + 'error: ' + err);
             }
         });
 
@@ -65,14 +52,11 @@ class App extends Component {
             email: '',
             message: '',
         })
-
-
     };
 
     render() {
     return (
-
-        <Grid className='page-wrap'>
+        <Grid>
             <Grid.Column mobile={16} computer={7} className="left-background">
                 <div className="left-wrap">
                     <h2 className="header-text">Programmer</h2>
@@ -133,7 +117,6 @@ class App extends Component {
                 </div>
             </Grid.Column>
         </Grid>
-
     );
   }
 }
