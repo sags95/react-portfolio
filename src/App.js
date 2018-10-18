@@ -34,15 +34,24 @@ class App extends Component {
 
     handleSubmit = (e, message) => {
 
+<<<<<<< HEAD
         if (this.state.name === '' || this.state.email === ''|| this.state.message === ''){
             this.setState({formError: true});
             alert("Must fill in all fields!")
+=======
+        if (this.state.name || this.state.email || this.state.message === ''){
+            this.setState({formError: true});
+>>>>>>> 829c2faae028515ffa1c3528ad760eb30170005d
         } else {
             this.setState({formError: false})
         }
 
 
+<<<<<<< HEAD
         if (this.state.formError == false){
+=======
+        if (this.state.formError === false){
+>>>>>>> 829c2faae028515ffa1c3528ad760eb30170005d
             const formUrl = 'https://script.google.com/macros/s/AKfycbzWhmdI0yAy3juKvWjNQ4S3JTZzJCUWJbMjAFBISIXUVzxPZcQ/exec';
             e.preventDefault();
     
