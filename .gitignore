@@ -6,6 +6,10 @@
 # testing
 /coverage
 
+.idea/
+.idea/worspace.xml
+.idea/tasks.xml
+
 # production
 /build
 

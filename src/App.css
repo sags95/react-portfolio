@@ -10,6 +10,7 @@
   padding-right: 0!important;
   top: 0!important;
 }
+
 .right-col{
   right: 0 !important;
   position: absolute!important;
@@ -26,7 +27,7 @@
   height: 80vh;
 }
 
-.right-wrap1{
+.right-wrap1{ 
   background-color: #0C5DA7;
   padding-left: 60px;
   padding-right: 60px;

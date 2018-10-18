@@ -11,6 +11,7 @@ class App extends Component {
             name: '',
             email: '',
             message: '',
+            formError: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,30 +29,47 @@ class App extends Component {
 
     /**
      * Calls a Google Sheet script to send form data (state) to Sheet.
+     * 
      */
 
     handleSubmit = (e, message) => {
-        const formUrl = 'https://script.google.com/macros/s/AKfycbzWhmdI0yAy3juKvWjNQ4S3JTZzJCUWJbMjAFBISIXUVzxPZcQ/exec';
-        e.preventDefault();
 
-        $.ajax({
-            url: formUrl,
-            dataType: 'json',
-            type: 'GET',
-            data: this.state,
-            success: function(data){
-                console.log('Form sent: ' + this.state)
-            },
-            error: function(xhr, status, err){
-                console.log('Form error:' + xhr + 'status: ' + status + 'error: ' + err);
+        if (this.state.name === '' || this.state.email === ''|| this.state.message === ''){
+            this.setState({formError: true});
+            alert("Must fill in all fields!")
+        } else {
+            this.setState({formError: false})
+        }
+
+
+        if (this.state.formError == false){
+            const formUrl = 'https://script.google.com/macros/s/AKfycbzWhmdI0yAy3juKvWjNQ4S3JTZzJCUWJbMjAFBISIXUVzxPZcQ/exec';
+            e.preventDefault();
+    
+            $.ajax({
+                url: formUrl,
+                dataType: 'json',
+                type: 'GET',
+                data: this.state,
+                success: function(data){
+                    console.log('Form sent: ' + this.state)
+                },
+                error: function(xhr, status, err){
+                    console.log('Form error:' + xhr + 'status: ' + status + 'error: ' + err);
+                }
+            });
+    
+            this.setState({
+                name: '',
+                email: '',
+                message: '',
+            })
+        } if (this.state.formError === true){
+            e.preventDefault();
+            const formAlert = () => {
+                alert('Form error: please make sure all the fields are filled!')
             }
-        });
-
-        this.setState({
-            name: '',
-            email: '',
-            message: '',
-        })
+        }
     };
 
     render() {
@@ -113,7 +131,7 @@ class App extends Component {
                     </Form>
                 </div>
                 <div className='footer'>
-                    <p style={{color: '#999'}}> © 2018 Alex Sagel, Made in Canada with React</p>
+                    <p style={{color: '#999'}}> © 2018 Alex Sagel, Made in Canada</p>
                 </div>
             </Grid.Column>
         </Grid>
